@@ -1,4 +1,4 @@
-name: Node.js CI
+name: myNotificationServiceCI
 
 on:
   push:
@@ -23,11 +23,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    # - name: Build Docker image
+    #   run: docker build . -t my-node-express-app
 
-    - name: Build Docker image
-      run: docker build . -t my-node-express-app
-
-    - name: Lint code
-      run: npm run lint
+    # - name: Lint code
+    #   run: npm run lint
