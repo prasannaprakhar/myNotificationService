@@ -22,17 +22,16 @@ const getNotificationData = async (req, res) => {
   try {
     // await producer.sendMessage(topic, JSON.stringify(notificationData));
           // Send message to SNS
-          // const params = {
-          //   Message: `
-          //     Hi,
+          const params = {
+            Message: `
+              Hi,
     
-          //   `,
-          //   Subject: "Work/Job Request : My Portfolio",
-          //   TopicArn: "arn:aws:sns:eu-north-1:816069136450:myPortfolioNotification",
-          // };
-          // const data = await sns.publish(params).promise();
-          // res.status(200).send(`Message sent to SNS: ${data.MessageId}`);
-          res.status(200).send(`Message sent to SNS`);
+            `,
+            Subject: "Work/Job Request : My Portfolio",
+            TopicArn: "arn:aws:sns:eu-north-1:816069136450:myPortfolioNotification",
+          };
+          const data = await sns.publish(params).promise();
+          res.status(200).send(`Message sent to SNS: ${data.MessageId}`);
           // console.log(`Message sent to SNS: ${data.MessageId}`);
   } catch (error) {
     // console.error('Error producing message in Kafka:', error);
