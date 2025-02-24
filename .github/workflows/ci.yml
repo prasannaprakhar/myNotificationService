@@ -41,8 +41,8 @@ jobs:
 
     - name: Push Docker image to Amazon ECR
       run: |
-        docker tag portfolio/my-portfolio:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
-        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-portfolio:latest
+        docker my-portfolio-notification-service:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-portfolio-notification-service:latest
+        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-portfolio-notification-service:latest
       env:
         AWS_REGION: eu-north-1
         AWS_ACCOUNT_ID: 816069136450
