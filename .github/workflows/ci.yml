@@ -44,4 +44,4 @@ jobs:
       run: docker tag my-portfolio-notification-service:latest 816069136450.dkr.ecr.eu-north-1.amazonaws.com/my-portfolio-notification-service:latest
 
     - name: Push Docker image to Amazon ECR
-      run: docker push 816069136450.dkr.ecr.eu-north-1.amazonaws.com/my-portfolio-notification-service:latest
+      run: docker push 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio
