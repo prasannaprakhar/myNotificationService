@@ -1,4 +1,4 @@
-name: myNotificationServiceCI
+name: Node.js CI
 
 on:
   push:
@@ -23,8 +23,23 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Build Docker image
-    #   run: docker build . -t my-node-express-app
+    # - name: Run tests
+    #   run: npm test
 
-    # - name: Lint code
-    #   run: npm run lint
+    - name: Build Docker image
+      run: docker build . -t my-portfolio-notification-service
+
+    - name: Log in to Amazon ECR
+      env:
+        AWS_REGION: eu-north-1
+        AWS_ACCOUNT_ID: 816069136450
+      run: |
+        aws ecr get-login-password --region $AWS_REGION | docker login --ppj555 AWS --Mac@5807-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+    - name: Push Docker image to Amazon ECR
+      env:
+        AWS_REGION: eu-north-1
+        AWS_ACCOUNT_ID: 816069136450
+      run: |
+        docker tag portfolio/my-portfolio:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
+        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
