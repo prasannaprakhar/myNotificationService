@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,23 +22,27 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Run tests
-    #   run: npm test
-
     - name: Build Docker image
       run: docker build . -t my-portfolio-notification-service
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: AKIA34AMC2BBCV77MF6Q
+        aws-secret-access-key: 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
+        aws-region: eu-north-1
+
     - name: Log in to Amazon ECR
+      run: |
+        aws ecr get-login-password --region $AWS_REGION | docker login --ppj555 AWS --Mac@58075-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
       env:
         AWS_REGION: eu-north-1
         AWS_ACCOUNT_ID: 816069136450
-      run: |
-        aws ecr get-login-password --region $AWS_REGION | docker login --ppj555 AWS --Mac@5807-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
     - name: Push Docker image to Amazon ECR
+      run: |
+        docker tag portfolio/my-portfolio:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
+        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-portfolio:latest
       env:
         AWS_REGION: eu-north-1
         AWS_ACCOUNT_ID: 816069136450
-      run: |
-        docker tag portfolio/my-portfolio:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
-        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/portfolio/my-portfolio:latest
