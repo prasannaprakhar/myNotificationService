@@ -1,14 +1,14 @@
 // const producer = require('../services/kafkaProducer');
 require('dotenv').config();
-// const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 // Configure AWS SDK v2
-// AWS.config.update({
-//   region: 'eu-north-1',
-//   accessKeyId: 'AKIA34AMC2BBCV77MF6Q',
-//   secretAccessKey: "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",
-// });
-// const sns = new AWS.SNS();
+AWS.config.update({
+  region: 'eu-north-1',
+  accessKeyId: 'AKIA34AMC2BBCV77MF6Q',
+  secretAccessKey: "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",
+});
+const sns = new AWS.SNS();
 
 const getHello = (req, res) => {
   console.log('Hello from notification controller');
