@@ -4,11 +4,11 @@ const AWS = require('aws-sdk');
 const consumer = kafka.consumer({ groupId: 'my-portfolio-group' });
 
 // Configure AWS SDK v2
-AWS.config.update({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
+// AWS.config.update({
+//   region: process.env.AWS_REGION,
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+// });
 const sns = new AWS.SNS();
 
 const runConsumer = async () => {
