@@ -41,7 +41,7 @@ jobs:
         aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 816069136450.dkr.ecr.eu-north-1.amazonaws.com
 
     - name: Tag Docker image
-      run: docker tag my-portfolio-notification-service:latest 816069136450.dkr.ecr.eu-north-1.amazonaws.com/my-portfolio-notification-service:latest
+      run: docker tag my-portfolio-notification-service:latest 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio:latest
 
     - name: Push Docker image to Amazon ECR
       run: docker push 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio
