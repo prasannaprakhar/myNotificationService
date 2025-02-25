@@ -15,6 +15,11 @@ const getHello = (req, res) => {
   res.status(200).send('Hello from notification controller');
 }
 
+const healthCheck = (req, res) => {
+  console.log('Hello from notification controller');
+  res.status(200).send('Health check passed');
+}
+
 const getNotificationData = async (req, res) => {
   const notificationData = req.body;
   // const topic = "myPortfolioTopic";
@@ -40,4 +45,4 @@ const getNotificationData = async (req, res) => {
   }
 };
 
-module.exports = { getNotificationData, getHello };
+module.exports = { getNotificationData, getHello, healthCheck };

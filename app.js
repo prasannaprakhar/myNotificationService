@@ -14,4 +14,8 @@ app.post('/send-notification', notificationController.getNotificationData);
 
 app.post('/hello', notificationController.getHello);
 
+
+// Health check
+app.post('/', notificationController.healthCheck);
+
 module.exports = app;
