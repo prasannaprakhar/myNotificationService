@@ -46,14 +46,14 @@ jobs:
     - name: Push Docker image to Amazon ECR
       run: docker push 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio
 
-    - name: Deploy to EC2
-      run: |
-        aws ec2 describe-instances --filters "Name=tag:Name,Values=my-ec2-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text > ec2_ip.txt
-        EC2_IP=$(cat ec2_ip.txt)
-        ssh -o StrictHostKeyChecking=no -i portfolio.pem ec2-user@$EC2_IP << 'EOF'
-          aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 816069136450.dkr.ecr.eu-north-1.amazonaws.com
-          docker pull 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio:latest
-          docker stop my-portfolio-notification-service || true
-          docker rm my-portfolio-notification-service || true
-          docker run -d -p 6000:6000 --name my-portfolio-notification-service:latest 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio:latest
-        EOF
+    # - name: Deploy to EC2
+    #   run: |
+    #     aws ec2 describe-instances --filters "Name=tag:Name,Values=my-ec2-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text > ec2_ip.txt
+    #     EC2_IP=$(cat ec2_ip.txt)
+    #     ssh -o StrictHostKeyChecking=no -i portfolio.pem ec2-user@$EC2_IP << 'EOF'
+    #       aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 816069136450.dkr.ecr.eu-north-1.amazonaws.com
+    #       docker pull 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio:latest
+    #       docker stop my-portfolio-notification-service || true
+    #       docker rm my-portfolio-notification-service || true
+    #       docker run -d -p 6000:6000 --name my-portfolio-notification-service:latest 816069136450.dkr.ecr.eu-north-1.amazonaws.com/portfolio/my-portfolio:latest
+    #     EOF
