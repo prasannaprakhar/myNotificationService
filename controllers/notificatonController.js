@@ -36,6 +36,8 @@ const getNotificationData = async (req, res) => {
       const params = {
         Message: `
           Hi,
+
+          ${notificationData.message}
         `,
         Subject: 'Work/Job Request : My Portfolio',
         TopicArn: 'arn:aws:sns:eu-north-1:816069136450:myPortfolioNotification',
